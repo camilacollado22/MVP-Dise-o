@@ -86,6 +86,7 @@ const comisiones = [
 // Inscripción previa de ejemplo para probar el escenario 3.
 const inscripciones = [
     {
+        id: 1,
         estudianteId: 2,
         comisionId: 3,
         materia: "Matemática I",
@@ -95,6 +96,7 @@ const inscripciones = [
     }
 ];
 
+let siguienteInscripcionId = inscripciones.length + 1;
 let estudianteActual = null;
 
 
@@ -264,6 +266,7 @@ async function intentarInscripcion(idComision) {
 
     // Se crea la solicitud en estado PENDIENTE.
     const nuevaInscripcion = {
+        id: siguienteInscripcionId++,
         estudianteId: estudianteActual.id,
         comisionId: comision.id,
         materia: comision.materia,
@@ -296,7 +299,8 @@ function resolverInscripcion(nuevaInscripcion, comision) {
         inscripcion !== nuevaInscripcion &&
         inscripcion.estudianteId === estudianteActual.id &&
         inscripcion.comisionId === comision.id &&
-        inscripcion.estado !== "RECHAZADA"
+        inscripcion.estado !== "RECHAZADA" &&
+        inscripcion.estado !== "CANCELADA"
     );
 
     if (yaEstabaInscripto) {
@@ -379,10 +383,10 @@ function mostrarResultado(estado, mensaje) {
 
     resultado.innerHTML = `
         <div class="resultado-icono">
-            ${estado === "APROBADA" ? "✓" : estado === "RECHAZADA" ? "✕" : "…"}
+            ${estado === "APROBADA" ? "✓" : estado === "RECHAZADA" ? "✕" : estado === "CANCELADA" ? "X" : "…"}
         </div>
         <div>
-            <span class="resultado-etiqueta">Resultado del último intento</span>
+            <span class="resultado-etiqueta">${estado === "CANCELADA" ? "Actualización de inscripción" : "Resultado del último intento"}</span>
             <strong>${estado}</strong>
             <p>${mensaje}</p>
         </div>
@@ -412,19 +416,17 @@ function mostrarInscripciones() {
         const elemento = document.createElement("article");
         elemento.className = "inscripcion-item";
 
-        const estadoClase = inscripcion.estado.toLowerCase();
+        const historial = inscripcion.historial || [inscripcion.estado];
 
         elemento.innerHTML = `
             <div class="inscripcion-info">
                 <div class="inscripcion-encabezado">
                     <h3>${inscripcion.materia}</h3>
                     <div class="recorrido-estados" aria-label="Recorrido de la solicitud">
-                        ${inscripcion.historial?.length > 1
-                            ? '<span class="estado-inscripcion estado-pendiente">PENDIENTE</span><span aria-hidden="true">→</span>'
-                            : ""}
-                        <span class="estado-inscripcion estado-${estadoClase}">
-                        ${inscripcion.estado}
-                        </span>
+                        ${historial.map((estado, indice) => `
+                            ${indice > 0 ? '<span aria-hidden="true">→</span>' : ""}
+                            <span class="estado-inscripcion estado-${estado.toLowerCase()}">${estado}</span>
+                        `).join("")}
                     </div>
                 </div>
 
@@ -435,11 +437,56 @@ function mostrarInscripciones() {
                 <p class="inscripcion-motivo">
                     ${inscripcion.motivo}
                 </p>
+                ${inscripcion.estado === "APROBADA"
+                    ? `<div class="inscripcion-acciones">
+                        <button
+                            class="btn-cancelar-inscripcion"
+                            data-inscripcion-id="${inscripcion.id}"
+                            type="button">
+                            Cancelar inscripción
+                        </button>
+                    </div>`
+                    : ""}
             </div>
         `;
 
         listaInscripciones.appendChild(elemento);
     });
+
+    document.querySelectorAll(".btn-cancelar-inscripcion").forEach(boton => {
+        boton.addEventListener("click", () => {
+            cancelarInscripcion(Number(boton.dataset.inscripcionId));
+        });
+    });
+}
+
+function cancelarInscripcion(idInscripcion) {
+    const inscripcion = inscripciones.find(
+        elemento => elemento.id === idInscripcion
+    );
+
+    if (
+        !inscripcion ||
+        !estudianteActual ||
+        inscripcion.estudianteId !== estudianteActual.id ||
+        inscripcion.estado !== "APROBADA"
+    ) {
+        return;
+    }
+
+    if (!inscripcion.historial) {
+        inscripcion.historial = [inscripcion.estado];
+    }
+
+    inscripcion.estado = "CANCELADA";
+    inscripcion.historial.push("CANCELADA");
+    inscripcion.motivo = "Inscripción cancelada por el estudiante.";
+
+    mostrarResultado(
+        "CANCELADA",
+        `Cancelaste tu inscripción a ${inscripcion.materia}.`
+    );
+    actualizarPantalla();
 }
 
 

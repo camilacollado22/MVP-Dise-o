@@ -476,6 +476,11 @@ footer {
     background-color: #fef3c7;
 }
 
+.estado-cancelada {
+    color: #475569;
+    background-color: #e2e8f0;
+}
+
 /* Bordes según el estado */
 
 .inscripcion-item:has(.estado-aprobada) {
@@ -488,6 +493,30 @@ footer {
 
 .inscripcion-item:has(.estado-pendiente) {
     border-left-color: #e5a52e;
+}
+
+.inscripcion-item:has(.estado-cancelada) {
+    border-left-color: #64748b;
+}
+
+.inscripcion-acciones {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.9rem;
+}
+
+.btn-cancelar-inscripcion {
+    padding: 0.55rem 0.85rem;
+    border: 1px solid #b42318;
+    border-radius: 0.4rem;
+    background-color: white;
+    color: #b42318;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cancelar-inscripcion:hover {
+    background-color: #fff1f0;
 }
 
 /* Sin inscripciones */
@@ -553,6 +582,11 @@ footer {
 .resultado-rechazada .resultado-icono {
     color: #991b1b;
     background-color: #fee2e2;
+}
+
+.resultado-cancelada .resultado-icono {
+    color: #475569;
+    background-color: #e2e8f0;
 }
 
 .resultado-pendiente .resultado-icono {
