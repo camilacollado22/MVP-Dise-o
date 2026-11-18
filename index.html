@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Universitaria | Inscripciones</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <div class="marca">
+            <div class="marca-icono">GU</div>
+            <div>
+                <h1>Gestión Universitaria</h1>
+                <p>Portal de autogestión académica</p>
+            </div>
+        </div>
+        <span class="periodo">Segundo cuatrimestre 2026</span>
+    </header>
+
+    <main class="contenedor">
+
+        <section id="pantalla-login" class="pantalla-login">
+            <div class="login-tarjeta">
+                <div class="icono-grande">🎓</div>
+                <h2>Bienvenido/a</h2>
+                <p>Seleccioná un estudiante para ingresar al sistema.</p>
+
+                <label for="estudiante-select">Estudiante</label>
+                <select id="estudiante-select">
+                    <option value="">Seleccionar estudiante...</option>
+                </select>
+
+                <button id="btn-ingresar" class="btn-principal">
+                    Ingresar al sistema
+                </button>
+                <p id="error-login"></p>
+            </div>
+        </section>
+
+        <!-- PANEL PRINCIPAL -->
+        <section id="pantalla-principal" class="oculto">
+
+            <div class="bienvenida">
+                <div>
+                    <span class="etiqueta">PORTAL DEL ESTUDIANTE</span>
+                    <h2>¡Hola, <span id="nombre-estudiante"></span>!</h2>
+                    <p>Desde acá podés consultar tu información académica e inscribirte a materias.</p>
+                </div>
+                <button id="btn-cerrar-sesion" class="btn-secundario">
+                    Cerrar sesión
+                </button>
+            </div>
+
+            <!-- CONTEXTO ACADÉMICO -->
+            <section class="seccion">
+                <div class="titulo-seccion">
+                    <div>
+                        <h3>Mi información académica</h3>
+                        <p>Datos del estudiante seleccionado</p>
+                    </div>
+                </div>
+
+                <div class="datos-grid">
+                    <article class="dato-card">
+                        <span>Legajo</span>
+                        <strong id="legajo-estudiante"></strong>
+                    </article>
+
+                    <article class="dato-card">
+                        <span>Carrera</span>
+                        <strong id="carrera-estudiante"></strong>
+                    </article>
+
+                    <article class="dato-card">
+                        <span>Estado</span>
+                        <strong id="estado-estudiante"></strong>
+                    </article>
+                </div>
+            </section>
+
+            <!-- OFERTA ACADÉMICA -->
+            <section class="seccion">
+                <div class="titulo-seccion">
+                    <div>
+                        <h3>Oferta académica</h3>
+                        <p>Materias y comisiones disponibles para inscripción</p>
+                    </div>
+                </div>
+
+                <div class="tabla-contenedor">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Materia</th>
+                                <th>Comisión</th>
+                                <th>Docente</th>
+                                <th>Horario</th>
+                                <th>Cupos</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-materias">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- INSCRIPCIONES DEL ESTUDIANTE -->
+            <section class="seccion">
+                <div class="titulo-seccion">
+                    <div>
+                        <h3>Mis inscripciones</h3>
+                        <p>Consultá las solicitudes realizadas y sus estados</p>
+                    </div>
+                </div>
+
+                <div id="lista-inscripciones" class="inscripciones-lista">
+                    <p class="vacio">Todavía no tenés inscripciones registradas.</p>
+                </div>
+            </section>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Gestión Universitaria · MVP académico · 2026</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,580 @@
+
+/* CONFIGURACIÓN GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6fa;
+    color: #263248;
+    min-height: 100vh;
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* ENCABEZADO */
+.encabezado {
+    background: #172b4d;
+    color: white;
+    padding: 1.2rem 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.marca-icono {
+    background: #d9a441;
+    color: #172b4d;
+    font-weight: bold;
+    padding: 0.8rem;
+    border-radius: 0.7rem;
+}
+
+.marca h1 {
+    font-size: 1.2rem;
+}
+
+.marca p {
+    font-size: 0.8rem;
+    color: #cbd5e1;
+    margin-top: 0.3rem;
+}
+
+.periodo {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+}
+
+/* CONTENEDOR */
+.contenedor {
+    width: 88%;
+    max-width: 1200px;
+    margin: 2.5rem auto;
+}
+
+/* LOGIN */
+.pantalla-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 65vh;
+}
+
+.login-tarjeta {
+    background: white;
+    width: 100%;
+    max-width: 430px;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.icono-grande {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+}
+
+.login-tarjeta h2 {
+    color: #172b4d;
+    margin-bottom: 0.6rem;
+}
+
+.login-tarjeta > p {
+    color: #718096;
+    font-size: 0.9rem;
+    margin-bottom: 1.8rem;
+}
+
+.login-tarjeta label {
+    display: block;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+select {
+    width: 100%;
+    padding: 0.85rem;
+    border: 1px solid #dce2ea;
+    border-radius: 0.5rem;
+    background: white;
+    color: #263248;
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+}
+
+.btn-principal {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: #1e477c;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-principal:hover {
+    background: #15345e;
+}
+
+.login-tarjeta small {
+    display: block;
+    margin-top: 1.5rem;
+    color: #929dad;
+}
+
+.mensaje-error {
+    color: #c0392b;
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+}
+
+/* BIENVENIDA */
+.bienvenida {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.etiqueta {
+    color: #b48632;
+    font-weight: bold;
+    font-size: 0.75rem;
+    letter-spacing: 0.08rem;
+}
+
+.bienvenida h2 {
+    color: #172b4d;
+    margin: 0.5rem 0;
+    font-size: 1.8rem;
+}
+
+.bienvenida p,
+.titulo-seccion p {
+    color: #718096;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.btn-secundario {
+    background: white;
+    color: #1e477c;
+    border: 1px solid #1e477c;
+    padding: 0.7rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.btn-secundario:hover {
+    background: #edf3fa;
+}
+
+/* SECCIONES */
+.seccion {
+    margin-bottom: 2.5rem;
+}
+
+.titulo-seccion {
+    margin-bottom: 1.2rem;
+}
+
+.titulo-seccion h3 {
+    color: #172b4d;
+    margin-bottom: 0.4rem;
+}
+
+/* DATOS ACADÉMICOS */
+.datos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.dato-card {
+    background: white;
+    padding: 1.4rem;
+    border-radius: 0.8rem;
+    border: 1px solid #e9edf3;
+}
+
+.dato-card span {
+    display: block;
+    color: #718096;
+    font-size: 0.85rem;
+    margin-bottom: 0.7rem;
+}
+
+.dato-card strong {
+    color: #172b4d;
+    font-size: 1rem;
+}
+
+/* TABLA */
+.tabla-contenedor {
+    background: white;
+    border-radius: 0.8rem;
+    border: 1px solid #e9edf3;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #edf0f4;
+    font-size: 0.85rem;
+}
+
+th {
+    background: #f8fafc;
+    color: #526078;
+}
+
+td {
+    color: #34445e;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.cupo-disponible {
+    color: #16834c;
+    font-weight: bold;
+}
+
+.cupo-agotado {
+    color: #c0392b;
+    font-weight: bold;
+}
+
+/* INSCRIPCIONES */
+.inscripciones-lista {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.vacio {
+    background: white;
+    border: 1px solid #e9edf3;
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    color: #718096;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: #8994a5;
+    font-size: 0.8rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 48em) {
+    .encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .contenedor {
+        width: 92%;
+    }
+
+    .datos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bienvenida {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 30em) {
+    .marca h1 {
+        font-size: 1rem;
+    }
+
+    .login-tarjeta {
+        padding: 1.5rem;
+    }
+
+    .bienvenida h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Etiquetas de carrera */
+.etiqueta-carrera,
+.etiqueta-otra-carrera {
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.4rem;
+    font-size: 0.75rem;
+}
+
+.etiqueta-carrera {
+    background-color: #dff3e5;
+    color: #176b38;
+}
+
+.etiqueta-otra-carrera {
+    background-color: #fff0d5;
+    color: #8a5700;
+}
+
+/* Botón de inscripción */
+.btn-inscribirse {
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: #172b4d;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-inscribirse:hover {
+    background-color: #294b7a;
+}
+
+/* Resultados de las validaciones */
+.resultado-inscripcion {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #d5dce5;
+    border-radius: 0.6rem;
+    background-color: #f3f6fa;
+}
+
+.resultado-inscripcion p {
+    margin-top: 0.5rem;
+}
+
+.inscripcion-item {
+    margin: 0.7rem 0;
+    padding: 1rem;
+    border: 1px solid #d5dce5;
+    border-radius: 0.6rem;
+    background-color: white;
+}
+
+.inscripcion-item p {
+    margin-top: 0.4rem;
+}
+
+.cupo-disponible {
+    color: #176b38;
+    font-weight: bold;
+}
+
+.cupo-agotado {
+    color: #b42318;
+    font-weight: bold;
+}
+
+/* =====================================
+   HISTORIAL DE INSCRIPCIONES
+===================================== */
+
+#lista-inscripciones {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.2rem;
+}
+
+.inscripcion-item {
+    padding: 1.2rem;
+    border: 1px solid #e1e6ed;
+    border-left: 0.35rem solid #64748b;
+    border-radius: 0.75rem;
+    background-color: #ffffff;
+    box-shadow: 0 0.15rem 0.5rem rgba(20, 35, 60, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inscripcion-item:hover {
+    transform: translateY(-0.15rem);
+    box-shadow: 0 0.35rem 0.9rem rgba(20, 35, 60, 0.1);
+}
+
+.inscripcion-encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.inscripcion-encabezado h3 {
+    margin: 0;
+    color: #172b4d;
+    font-size: 1.05rem;
+}
+
+.inscripcion-comision {
+    margin-top: 0.55rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.inscripcion-motivo {
+    margin-top: 0.65rem;
+    color: #475569;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+/* Estados */
+
+.estado-inscripcion {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.estado-aprobada {
+    color: #166534;
+    background-color: #dcfce7;
+}
+
+.estado-rechazada {
+    color: #991b1b;
+    background-color: #fee2e2;
+}
+
+.estado-pendiente {
+    color: #92400e;
+    background-color: #fef3c7;
+}
+
+/* Bordes según el estado */
+
+.inscripcion-item:has(.estado-aprobada) {
+    border-left-color: #22a06b;
+}
+
+.inscripcion-item:has(.estado-rechazada) {
+    border-left-color: #dc5555;
+}
+
+.inscripcion-item:has(.estado-pendiente) {
+    border-left-color: #e5a52e;
+}
+
+/* Sin inscripciones */
+
+.sin-inscripciones {
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px dashed #cbd5e1;
+    border-radius: 0.75rem;
+    color: #64748b;
+    background-color: #f8fafc;
+}
+
+/* =====================================
+   MENSAJE DEL ÚLTIMO INTENTO
+===================================== */
+
+.resultado-inscripcion {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 1.2rem 0;
+    padding: 1.1rem;
+    border: 1px solid #e1e6ed;
+    border-radius: 0.75rem;
+    background-color: #f8fafc;
+}
+
+.resultado-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.resultado-etiqueta {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #64748b;
+    font-size: 0.75rem;
+}
+
+.resultado-inscripcion strong {
+    color: #172b4d;
+}
+
+.resultado-inscripcion p {
+    margin-top: 0.4rem;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.resultado-aprobada .resultado-icono {
+    color: #166534;
+    background-color: #dcfce7;
+}
+
+.resultado-rechazada .resultado-icono {
+    color: #991b1b;
+    background-color: #fee2e2;
+}
+
+.resultado-pendiente .resultado-icono {
+    color: #92400e;
+    background-color: #fef3c7;
+}
+
+/* Adaptación a pantallas pequeñas */
+
+@media (max-width: 30em) {
+    .inscripcion-item {
+        padding: 0.9rem;
+    }
+
+    .inscripcion-encabezado {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .resultado-inscripcion {
+        padding: 0.9rem;
+    }
+}
+
+
