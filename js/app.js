@@ -403,6 +403,18 @@ function mostrarInscripciones() {
             inscripcion.estudianteId === estudianteActual.id
     );
 
+    inscripcionesEstudiante.sort((a, b) => {
+        if (a.estado === "APROBADA" && b.estado !== "APROBADA") {
+            return -1;
+        }
+
+        if (a.estado !== "APROBADA" && b.estado === "APROBADA") {
+            return 1;
+        }
+
+        return 0;
+    });
+
     if (inscripcionesEstudiante.length === 0) {
         listaInscripciones.innerHTML = `
             <div class="sin-inscripciones">
