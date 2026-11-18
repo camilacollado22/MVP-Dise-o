@@ -578,3 +578,15 @@ footer {
 }
 
 
+
+.recorrido-estados {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}

@@ -238,7 +238,7 @@ function cargarOfertaAcademica() {
 // CASO DE USO: INSCRIBIRSE A MATERIA
 // ==========================================
 
-function intentarInscripcion(idComision) {
+async function intentarInscripcion(idComision) {
     const comision = comisiones.find(
         elemento => elemento.id === idComision
     );
@@ -246,7 +246,7 @@ function intentarInscripcion(idComision) {
     // Validación preliminar: la comisión debe existir.
     if (!comision) {
         mostrarResultado(
-            "RECHAZADA",
+            "Solicitud no iniciada",
             "La comisión seleccionada no existe."
         );
         return;
@@ -256,7 +256,7 @@ function intentarInscripcion(idComision) {
     // a la carrera del estudiante.
     if (comision.carrera !== estudianteActual.carrera) {
         mostrarResultado(
-            "RECHAZADA",
+            "Solicitud no iniciada",
             "La materia no pertenece a tu carrera. No se creó una inscripción."
         );
         return;
@@ -269,11 +269,28 @@ function intentarInscripcion(idComision) {
         materia: comision.materia,
         comision: comision.numero,
         estado: "PENDIENTE",
-        motivo: ""
+        historial: ["PENDIENTE"],
+        motivo: "Verificando los requisitos de inscripción…"
     };
 
     inscripciones.push(nuevaInscripcion);
 
+    mostrarInscripciones();
+    mostrarResultado("PENDIENTE", nuevaInscripcion.motivo);
+    document.getElementById("resultado-inscripcion").scrollIntoView({ block: "center" });
+    const botones = document.querySelectorAll(".btn-inscribirse, #btn-cerrar-sesion");
+    botones.forEach(boton => boton.disabled = true);
+
+    try {
+        // Pausa de la simulación para que el estado inicial sea visible durante la demo.
+        await new Promise(resolver => setTimeout(resolver, 1800));
+        resolverInscripcion(nuevaInscripcion, comision);
+    } finally {
+        botones.forEach(boton => boton.disabled = false);
+    }
+}
+
+function resolverInscripcion(nuevaInscripcion, comision) {
     // Validación 1: inscripción previa.
     const yaEstabaInscripto = inscripciones.some(inscripcion =>
         inscripcion !== nuevaInscripcion &&
@@ -323,6 +340,7 @@ function intentarInscripcion(idComision) {
 
     // Si todas las validaciones se cumplen, se aprueba.
     nuevaInscripcion.estado = "APROBADA";
+    nuevaInscripcion.historial.push("APROBADA");
     nuevaInscripcion.motivo = "Se cumplieron todas las validaciones.";
 
     mostrarResultado(
@@ -335,6 +353,7 @@ function intentarInscripcion(idComision) {
 
 function rechazarInscripcion(inscripcion, motivo) {
     inscripcion.estado = "RECHAZADA";
+    inscripcion.historial.push("RECHAZADA");
     inscripcion.motivo = motivo;
 
     mostrarResultado("RECHAZADA", motivo);
@@ -356,7 +375,7 @@ function mostrarResultado(estado, mensaje) {
         );
     }
 
-    resultado.className = `resultado-inscripcion resultado-${estado.toLowerCase()}`;
+    resultado.className = `resultado-inscripcion resultado-${estado.toLowerCase().replaceAll(" ", "-")}`;
 
     resultado.innerHTML = `
         <div class="resultado-icono">
@@ -399,9 +418,14 @@ function mostrarInscripciones() {
             <div class="inscripcion-info">
                 <div class="inscripcion-encabezado">
                     <h3>${inscripcion.materia}</h3>
-                    <span class="estado-inscripcion estado-${estadoClase}">
+                    <div class="recorrido-estados" aria-label="Recorrido de la solicitud">
+                        ${inscripcion.historial?.length > 1
+                            ? '<span class="estado-inscripcion estado-pendiente">PENDIENTE</span><span aria-hidden="true">→</span>'
+                            : ""}
+                        <span class="estado-inscripcion estado-${estadoClase}">
                         ${inscripcion.estado}
-                    </span>
+                        </span>
+                    </div>
                 </div>
 
                 <p class="inscripcion-comision">
@@ -441,7 +465,8 @@ function cerrarSesion() {
     const resultado = document.getElementById("resultado-inscripcion");
 
     if (resultado) {
-        resultado.remove();
+        resultado.replaceChildren();
+        resultado.className = "";
     }
 }
 
