@@ -502,17 +502,33 @@ footer {
 .inscripcion-acciones {
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.6rem;
     margin-top: 0.9rem;
 }
 
+.btn-descargar-certificado,
 .btn-cancelar-inscripcion {
     padding: 0.55rem 0.85rem;
-    border: 1px solid #b42318;
     border-radius: 0.4rem;
-    background-color: white;
-    color: #b42318;
     font-weight: 600;
     cursor: pointer;
+}
+
+.btn-descargar-certificado {
+    border: 1px solid #1e477c;
+    background-color: #1e477c;
+    color: white;
+}
+
+.btn-descargar-certificado:hover {
+    background-color: #15345e;
+}
+
+.btn-cancelar-inscripcion {
+    border: 1px solid #b42318;
+    background-color: white;
+    color: #b42318;
 }
 
 .btn-cancelar-inscripcion:hover {

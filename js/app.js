@@ -452,6 +452,11 @@ function mostrarInscripciones() {
                 ${inscripcion.estado === "APROBADA"
                     ? `<div class="inscripcion-acciones">
                         <button
+                            class="btn-descargar-certificado"
+                            type="button">
+                            Descargar certificado
+                        </button>
+                        <button
                             class="btn-cancelar-inscripcion"
                             data-inscripcion-id="${inscripcion.id}"
                             type="button">
